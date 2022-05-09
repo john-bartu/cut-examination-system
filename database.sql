@@ -1,0 +1,19 @@
+CREATE TABLE answers(
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+   answer TEXT    NOT NULL,
+   id_question INTEGER NOT NULL,
+   FOREIGN KEY (id_question) REFERENCES questions(id)
+);
+
+CREATE TABLE questions(
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+   question TEXT    NOT NULL,
+   id_subject INTEGER NOT NULL,
+FOREIGN KEY (id_subject) REFERENCES subjects(id)
+);
+
+
+CREATE TABLE subjects(
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+   subject TEXT NOT NULL
+);
