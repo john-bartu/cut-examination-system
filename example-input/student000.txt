@@ -1,0 +1,76 @@
+
+Data: 05-04-2022 r.                                             Rok Ak.: 2021/22
+
+
+Karta przebiegu studiów
+      studenta: Wydzia³u Informatyki i Telekomunikacji
+                
+
+      Nazwisko: NAZWISKO IMIE IMIE                 Numer albumu: 0101223
+Data urodzenia: 01-01-1980               Data rozpoczêcia studiów: 01-10-2007
+      Kierunek: Informatyka
+   Specjalnoœæ: Informatyka stosowana
+
+Semestr: 01 w roku: 2007/08
+Semestr zaliczono dnia: 16-02-2008
+
+
+ lp nazwa przedmiotu                                    g.W.   g.Æ.   g.L.  g.LK.   g.P.   g.S. E ocena  ECTS
+--- ------------------------------------------------- ------ ------ ------ ------ ------ ------ - ----- -----
+  1 In¿ynieria wiedzy i systemy ekspertowe             18,00   9,00   0,00   0,00   0,00   0,00 E   3,0   8,0
+  2 Metody komputerowe w nauce                         18,00   9,00   9,00   0,00   0,00   0,00 E   3,0   8,0
+  3 Oblicz wysokiej wydajnoœci                         18,00   0,00   9,00   0,00   9,00   0,00 E   3,0   8,0
+  4 Zarz¹dzanie projektem informatycznym               18,00   0,00   0,00   0,00  18,00   0,00 -   4,5   6,0
+==============================================================================================================
+% punktów =    30,0 /  30,0 = 100,00%                                                         Razem    30,00
+
+Semestr: 02 w roku: 2007/08
+Semestr zaliczono dnia: 21-06-2008
+
+  5 Sieci neuronowe                                    18,00   0,00   9,00   0,00   0,00   0,00 -   4,5   7,0
+  6 Rozproszone bazy danych                            18,00   0,00   0,00   0,00  18,00   0,00 E   4,0   8,0
+  7 Programowanie us³ug sieciowych                     18,00   0,00  18,00   0,00   0,00   0,00 E   5,0   8,0
+  8 Systemy czasu rzeczywistego                        18,00   0,00  18,00   0,00   0,00   0,00 -   3,5   7,0
+==============================================================================================================
+% punktów =    30,0 /  30,0 = 100,00%                                                         Razem    30,00
+
+Semestr: 03 w roku: 2008/09
+Semestr zaliczono dnia: 14-02-2009
+
+  9 Modelowanie rozmyte                                18,00   0,00  12,00   0,00   0,00   0,00 E   4,0   8,0
+ 10 Geometria obliczeniowa                             18,00   0,00  18,00   0,00   0,00   0,00 -   5,0   6,0
+ 11 Modelowanie procesów dyskretnych                   18,00   0,00  12,00   0,00   0,00   0,00 E   3,0   8,0
+ 12 Komputerowe przetwarzanie obrazu                   21,00   0,00  18,00   0,00   0,00   0,00 -   4,5   7,0
+ 13 Etyka w zawodzie in¿yniera                          9,00   0,00   0,00   0,00   0,00   0,00 -   4,0   1,0
+==============================================================================================================
+% punktów =    30,0 /  30,0 = 100,00%                                                         Razem    30,00
+
+Semestr: 04 w roku: 2008/09
+Semestr zaliczono dnia: 24-09-2009
+
+ 14 Problemy i zastosowania informatyki                18,00   0,00  18,00   0,00   0,00   0,00 -   4,5   6,0
+ 15 Seminarium dyplomowe                                0,00  18,00   0,00   0,00   0,00   0,00 -   4,0   4,0
+ 16 Praca magisterska                                   0,00   0,00   0,00   0,00   0,00   0,00 -   5,0  20,0
+==============================================================================================================
+% punktów =    30,0 /  30,0 = 100,00%                                                         Razem    30,00
+
+
+    Temat pracy: Ookodjs okfdso
+       Promotor: dr ....
+     Recenzenci: dr hab. ....
+                 
+
+  Ocena koñcowa: 4,46
+ Tytu³ zawodowy: magister in¿ynier
+  Numer dyplomu: 432432
+  Data egz.dypl: 20-09-2009
+
+
+Sk³adowe oceny na dyplom:
+
+                                                                               waga     ocena
+                                                                               -------- -----
+Ocena z toku studiów                                                           0,600000 4,10 = 2,460
+Ocena pracy dyplomowej                                                         0,200000 5,00 = 1,000
+Ocena egzaminu dyplomowego                                                     0,200000 5,00 = 1,000
+ 
