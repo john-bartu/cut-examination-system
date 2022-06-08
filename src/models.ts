@@ -14,7 +14,7 @@ export interface Subject {
 export interface Semester {
     num: number
     year: string,
-    finishDate: Date
+    finishDate: Date | string
     subjects: Subject[]
     avgGrade: number | null,
     totalECTS: number | string

@@ -69,12 +69,17 @@ export class ExcelReader {
             specialization: specialization
         };
 
-        const subjectNoGradesRe = /((\d+)\s(.+)\s([ćĆ][wW]|[wWpPlL])\s+([oOzZ-])\s+([tTnN])\s+([tTnN])\s+(\d+,\d+)\s*)[-wW]*\s*$/;
-        const subjectGradesRe = /((\d+)\s(.+)\s([ćĆ][wW]|[wWpPlL])\s+([oOzZ-])\s+([tTnN])\s+([tTnN])\s+(\d+,\d+)\s+)\s*([wW])*\s*(((\d+,\d+\s+)|(X\s+)|(Z\s)){1,3})\s*((\d+,\d+)|([xXzZ]))/;
+        const subjectNoGradesRe = /((\d+)\s(.+)\s([ćĆ][wW]|\w+)\s+([oOzZ-])\s+([tTnN])\s+([tTnN])\s+(\d+,\d+)\s*)[-wW]*\s*$/;
+        const subjectGradesRe = /((\d+)\s(.+)\s([ćĆ][wW]|\w+)\s+([oOzZ-])\s+([tTnN])\s+([tTnN])\s+(\d+,\d+)\s+)\s*([wW])*\s*(((\d+,\d+\s+)|(X\s+)|(Z\s)){0,3})\s*((\d+,\d+)|([xXzZ]))/;
 
         const semesters: Semester[] = []
-        for (let i = j; i < this.rows.length - 8; i++) {
+        let i;
+        for (i = j; i < this.rows.length - 8; i++) {
             const row = this.rows[i];
+
+            if (this.rows[i].match(/Legenda:/)) {
+                break;
+            }
 
             let rowMatch;
             if ((rowMatch = row.match(/Semestr: (\d{2})\s+w roku: (\d{4}\/\d{2})/))) {
@@ -83,8 +88,12 @@ export class ExcelReader {
                 i++;
 
                 const semFinishRow = this.rows[i];
-                const semFinish = semFinishRow.match(/Semestr zaliczono dnia: (([0-2]\d|3[0-1])-(0\d|1[0-2])-(\d{4}))/);
-                const semFinishDate = new Date(`${semFinish[4]}-${semFinish[3]}-${semFinish[2]}`);
+                let semFinishMatch, semFinishDate;
+                if ((semFinishMatch = semFinishRow.match(/Semestr zaliczono dnia: (([0-2]\d|3[0-1])-(0\d|1[0-2])-(\d{4}))/))) {
+                    semFinishDate = new Date(`${semFinishMatch[4]}-${semFinishMatch[3]}-${semFinishMatch[2]}`);
+                } else if ((semFinishMatch = semFinishRow.match(/Semestr zaliczono dnia: (.+)/))) {
+                    semFinishDate = semFinishMatch[1].trim();
+                }
                 i++;
 
                 const subjects: Subject[] = [];
@@ -115,14 +124,24 @@ export class ExcelReader {
             }
         }
 
-        const subjectRow = this.rows[this.rows.length - 4]
-        const subjectEngRow = this.rows[this.rows.length - 3]
-        const promoterRow = this.rows[this.rows.length - 2]
-        const reviewersRow = this.rows[this.rows.length - 1]
+        let subjectMatch;
+        while (!(subjectMatch = this.rows[i].match(/Temat pracy:(.+)/))) {
+            i++;
+        }
 
-        const subject = subjectRow.match(/Temat pracy:(.+)/)[1].trim();
+        let subject = subjectMatch[1].trim();
+        i++;
+
+        let promoterMatch;
+        while (!(promoterMatch = this.rows[i].match(/Promotor:(.+)/))) {
+            subject = subject.concat(" ", this.rows[i].trim());
+            i++;
+        }
+        const promoter = promoterMatch[1].trim();
+
+        const subjectEngRow = this.rows[this.rows.length - 3]
         const subjectEng = subjectEngRow.trim();
-        const promoter = promoterRow.match(/Promotor:(.+)/)[1].trim();
+        const reviewersRow = this.rows[this.rows.length - 1]
         const reviewers = reviewersRow.match(/Recenzenci:(.+)/)[1].trim();
 
         const thesis = <Thesis>{
