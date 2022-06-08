@@ -71,6 +71,7 @@ export class ExcelReader {
 
         const subjectNoGradesRe = /((\d+)\s(.+)\s([ćĆ][wW]|\w+)\s+([oOzZ-])\s+([tTnN])\s+([tTnN])\s+(\d+,\d+)\s*)[-wW]*\s*$/;
         const subjectGradesRe = /((\d+)\s(.+)\s([ćĆ][wW]|\w+)\s+([oOzZ-])\s+([tTnN])\s+([tTnN])\s+(\d+,\d+)\s+)\s*([wW])*\s*(((\d+,\d+\s+)|(X\s+)|(Z\s)){0,3})\s*((\d+,\d+)|([xXzZ]))/;
+        const avgEctsRe = /Średnia ocen:\s+\d+,\d+\s+\/\s+\d+,\d+\s+=\s+(\d+,\d+|\?)\s+Razem\s+(\d+,\d+)/;
 
         const semesters: Semester[] = []
         let i;
@@ -99,17 +100,27 @@ export class ExcelReader {
                 const subjects: Subject[] = [];
                 while ((rowMatch = this.rows[i].match(subjectGradesRe))
                 || (rowMatch = this.rows[i].match(subjectNoGradesRe))) {
-                    const subject = ExcelReader.parseSubjectRow(rowMatch, this.rows[i]);
+                    const row = this.rows[i];
+
+                    const additionalTitleLines = [];
+                    while (!this.rows[i+1].match(subjectGradesRe)
+                        && !this.rows[i+1].match(subjectNoGradesRe)
+                        && !this.rows[i+1].match(avgEctsRe)
+                    ) {
+                        additionalTitleLines.push(this.rows[i+1].trim());
+                        i++;
+                    }
+
+                    const subject = ExcelReader.parseSubjectRow(rowMatch, row, additionalTitleLines);
                     subjects.push(subject);
                     i++;
                 }
 
-                const avgEctsMatch = this.rows[i].match(/Średnia ocen:\s+\d+,\d+\s+\/\s+\d+,\d+\s+=\s+(\d+,\d+|\?)\s+Razem\s+(\d+,\d+)/);
+                const avgEctsMatch = this.rows[i].match(avgEctsRe);
                 let avgGradeStr = avgEctsMatch[1];
                 let avgGrade: number | string = avgGradeStr;
                 if (avgGradeStr != '?')
                     avgGrade = Number.parseFloat(avgGradeStr.replace(',', '.'))
-
 
                 const totalEcts = Number.parseFloat(avgEctsMatch[2]);
 
@@ -186,9 +197,12 @@ export class ExcelReader {
         return rows;
     }
 
-    private static parseSubjectRow(rowMatch: any, row: any): Subject {
+    private static parseSubjectRow(rowMatch: any, row: any, additionalTitleLines: string[]): Subject {
         const num = Number.parseInt(rowMatch[2]);
-        const title = rowMatch[3].trim();
+        let title = rowMatch[3].trim();
+        for (let line of additionalTitleLines) {
+            title = title.concat(" ", line);
+        }
         const classType = rowMatch[4];
         const passType = rowMatch[5];
         const toAvg = rowMatch[6].toUpperCase() == 'T';
