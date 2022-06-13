@@ -1,0 +1,17 @@
+<p>nr albumu: {{ progressRecord.student.albumNum }}</p>
+<p>imie: {{ progressRecord.student.name }}</p>
+<p>data uro: {{ progressRecord.student.birthDate }}</p>
+<p>specjalność: {{ progressRecord.student.specialty }}</p>
+<p>Temat pracy: {{ progressRecord.thesis.subject }}</p>
+<p>rok: {{ progressRecord.academicYear }}</p>
+<p>srednia ocena ze studiow: {{ avgGrade | number: "1.2-2" }}</p>
+<p>Ocena z pracy: {{ thesisGrade | number: "1.2-2" }}</p>
+<p>Ocena z egzaminu: {{ diplomaGrade | number: "1.2-2" }}</p>
+<p>Końcowa ocena: {{ finalGrade | number: "1.2-2" }}</p>
+<button
+  mat-button
+  routerLink="/userList"
+  (click)="addStudentToExaminated(progressRecord.student.albumNum)"
+>
+  Zakończ
+</button>
