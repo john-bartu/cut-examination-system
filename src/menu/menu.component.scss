@@ -1,0 +1,71 @@
+.body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+}
+
+.imgBacground{
+  margin: 0;
+  padding: 0;
+  width: 67%;
+}
+
+.imgBacground > img{
+  height: 100vh;
+}
+
+//RIGHT MENU
+
+.right_menu{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 33vw;
+  background: white;
+}
+
+.right_menu > nav{
+  height: 60%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.right_menu_button{
+  background: #F0F0F0;
+  border: 1px solid #C0C0C0;
+  box-shadow: 0px 3px 6px rgb(0 0 0 / 25%);
+  border-radius: 3px;
+  margin: 0.5em 0;
+  height: 10%;
+  width: 60%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 2em;
+  color: #2A2F33;
+  cursor:pointer;
+}
+
+.right_menu > nav > a:hover{
+  background: gray;
+}
+
+.right_menu > nav > a:active{
+  background: lightgray;
+}
+
+.logo{
+  height: 40%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo > img{
+  width: 100%;
+}

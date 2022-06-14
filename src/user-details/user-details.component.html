@@ -1,17 +1,57 @@
-<nav>
-  <a routerLink="/userList">cancel</a>
-</nav>
-<p>nr albumu: {{ progressRecord.student.albumNum }}</p>
-<p>imie: {{ progressRecord.student.name }}</p>
-<p>data uro: {{ progressRecord.student.birthDate }}</p>
-<p>kierunek: {{ progressRecord.student.course }}</p>
-<p>specjalność: {{ progressRecord.student.specialty }}</p>
-<p>Temat pracy: {{ progressRecord.thesis.subject }}</p>
-<p>rok: {{ progressRecord.academicYear }}</p>
-<p>srednia ocena ze studiow: {{ avgGrade | number: "1.2-2" }}</p>
-<button
-  mat-button
-  routerLink="/userExamination/{{ progressRecord.student.albumNum }}"
->
-  Proces dyplomowy
-</button>
+<div class="body">
+  <div class="top-menu">
+    <div class="logo">
+      <img src="./assets/img/logo2.png" alt="error">
+    </div>
+    <nav class="top-menu-button">
+      <a routerLink="/userList">cancel</a>
+    </nav>
+  </div>
+
+  <div class="user-panel">
+    <div class="user-num-div">
+      <div class="user-image">
+        <p>nr albumu: {{ progressRecord.student.albumNum }}</p>
+      </div>
+
+      <div class="user-rating">
+        <p>srednia ocena ze studiow: {{ avgGrade | number: "1.2-2" }}</p>
+      </div>
+    </div>
+
+    <div class="right-div">
+      <div class="user-name">
+        <p>imie: {{ progressRecord.student.name }}</p>
+      </div>
+
+      <div class="right-div-down">
+        <div class="right_div-one_left">
+          <div><p>data uro: {{ progressRecord.student.birthDate }}</p></div>
+          <div><p>kierunek: {{ progressRecord.student.course }}</p></div>
+          <div><p>Temat pracy: {{ progressRecord.thesis.subject }}</p></div>
+        </div>
+
+        <div class="right-div-two_right">
+          <div><p>specjalność: {{ progressRecord.student.specialty }}</p></div>
+          <div><p>rok: {{ progressRecord.academicYear }}</p></div>
+          <div>
+            <button mat-button routerLink="/userExamination/{{ progressRecord.student.albumNum }}">
+            Proces dyplomowy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
