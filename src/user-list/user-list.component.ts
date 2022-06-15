@@ -92,39 +92,51 @@ export class UserListComponent implements AfterViewInit {
     let semesterIds: number[] = [];
     let thesisId: number;
     let subjectIds: number[] = [];
-    this.userListService.addStudent(progressRecord.student).subscribe((id) => {
-      studentId = id;
-    });
+    let controlUser;
 
-    this.userListService.addThesis(progressRecord.thesis).subscribe((id) => {
-      thesisId = id;
-    });
+    this.userListService.getStudent(progressRecord.student.albumNum).subscribe((record)=>{
+        controlUser = record;
+    })
 
-    for (let semester of progressRecord.semesters) {
-      for (let subject of semester.subjects) {
+    if (Object.keys(controlUser).length === 0) {
+      this.userListService.addStudent(progressRecord.student).subscribe((id) => {
+        studentId = id;
+      });
+
+      this.userListService.addThesis(progressRecord.thesis).subscribe((id) => {
+        thesisId = id;
+      });
+
+      for (let semester of progressRecord.semesters) {
+        for (let subject of semester.subjects) {
+          this.userListService
+            .addSubject(this.subjectToSubjectSchema(subject))
+            .subscribe((id) => {
+              subjectIds.push(id);
+            });
+        }
         this.userListService
-          .addSubject(this.subjectToSubjectSchema(subject))
+          .addSemester(this.semesterToSemesterSchema(semester, subjectIds))
           .subscribe((id) => {
-            subjectIds.push(id);
+            semesterIds.push(id);
           });
+        subjectIds = [];
       }
       this.userListService
-        .addSemester(this.semesterToSemesterSchema(semester, subjectIds))
-        .subscribe((id) => {
-          semesterIds.push(id);
-        });
-      subjectIds = [];
-    }
-    this.userListService
-      .addProgressRecord(
-        this.progressRecordToProgressRecordSchema(
-          progressRecord,
-          studentId,
-          semesterIds,
-          thesisId
+        .addProgressRecord(
+          this.progressRecordToProgressRecordSchema(
+            progressRecord,
+            studentId,
+            semesterIds,
+            thesisId
+          )
         )
-      )
-      .subscribe(() => {});
+        .subscribe(() => {});
+    } else {
+      console.log('student with album number: ' + progressRecord.student.albumNum + ' already exists')
+    }
+
+
   }
 
   subjectToSubjectSchema(subject: ISubject): Subject {

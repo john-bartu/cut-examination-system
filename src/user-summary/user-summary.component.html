@@ -25,7 +25,7 @@
 
       <div class="right-div-down">
         <div class="right_div-one_left">
-          <div><p>data uro: {{ progressRecord.student.birthDate }}</p></div>
+          <div><p>data uro: {{ progressRecord.student.birthDate | date: "d.MM.y"  }}</p></div>
           <div><p>kierunek: {{ progressRecord.student.course }}</p></div>
           <div><p>Temat pracy: {{ progressRecord.thesis.subject }}</p></div>
         </div>

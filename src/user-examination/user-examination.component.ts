@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Student } from '../../app/student.schema';
 import { GradesService } from '../grades.service';
 import { IQuestion } from '../parser/models';
+import { AuxiliaryFunctions } from '../parser/parser';
 import { QuestionManagerService } from '../question-manager/question-manager.service';
 import { UserListService } from '../user-list/user-list.service';
 
@@ -93,11 +94,11 @@ export class UserExaminationComponent implements OnInit {
 
   updateDiplomaGrade(grade: Event): void {
     const xd = grade.target as HTMLTextAreaElement;
-    this.gradesService.setDiplomaGrade(xd.value);
+    this.gradesService.setDiplomaGrade(AuxiliaryFunctions.formatGradeToCorrectFormat(parseFloat(xd.value)));
   }
 
   updateThesisGrade(grade: Event): void {
     const xd = grade.target as HTMLTextAreaElement;
-    this.gradesService.setThesisGrade(xd.value);
+    this.gradesService.setThesisGrade(AuxiliaryFunctions.formatGradeToCorrectFormat(parseFloat(xd.value)));
   }
 }

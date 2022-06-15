@@ -281,4 +281,11 @@ export class ExcelReader {
       ECTS: ects,
     };
   }
+
+}
+
+export class AuxiliaryFunctions {
+  public static formatGradeToCorrectFormat(grade: number): number {
+    return parseFloat(parseFloat(grade.toString().slice(0, (grade.toString().indexOf('.') + 4))).toFixed(2));
+  }
 }

@@ -26,7 +26,7 @@
 
       <div class="right-div-down">
         <div class="right_div-one_left">
-          <div><p>data uro: {{ progressRecord.student.birthDate }}</p></div>
+          <div><p>data uro: {{ progressRecord.student.birthDate | date: "d.MM.y" }}</p></div>
           <div><p>kierunek: {{ progressRecord.student.course }}</p></div>
           <div><p>Temat pracy: {{ progressRecord.thesis.subject }}</p></div>
         </div>
@@ -35,9 +35,10 @@
           <div><p>specjalność: {{ progressRecord.student.specialty }}</p></div>
           <div><p>rok: {{ progressRecord.academicYear }}</p></div>
           <div>
-            <button mat-button routerLink="/userExamination/{{ progressRecord.student.albumNum }}">
+            <button mat-button   [disabled]="!areQuestionsExist()"  routerLink="/userExamination/{{ progressRecord.student.albumNum }}">
             Proces dyplomowy
             </button>
+            <div *ngIf="!areQuestionsExist()">Najpierw zaimportuj pytania!</div>
           </div>
         </div>
       </div>

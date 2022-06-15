@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Index } from 'typeorm';
 import { ProgressRecord } from '../../app/progress-record.schema';
 import { Semester } from '../../app/semester.schema';
 import { Student } from '../../app/student.schema';
 import { Thesis } from '../../app/thesis.schema';
 import { GradesService } from '../grades.service';
 import { IProgressRecord, ISemester, ISubject } from '../parser/models';
+import { AuxiliaryFunctions } from '../parser/parser';
+import { QuestionManagerService } from '../question-manager/question-manager.service';
 import { UserListService } from '../user-list/user-list.service';
 
 @Component({
@@ -20,6 +23,7 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userListService: UserListService,
+    private questionManagerService: QuestionManagerService,
     private gradesService: GradesService
   ) {
     this.getProgressRecord();
@@ -116,7 +120,21 @@ export class UserDetailsComponent implements OnInit {
         avgGrade += semester.avgGrade;
       }
     }
-
-    return avgGrade / this.progressRecord.semesters.length;
+    return AuxiliaryFunctions.formatGradeToCorrectFormat(avgGrade / this.progressRecord.semesters.length);
   }
+
+
+  areQuestionsExist() {
+    let numberOfQuestions;
+    this.questionManagerService.getQuestions().subscribe((results)=>{
+      numberOfQuestions = results.length;
+    })
+    if (numberOfQuestions == 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
 }
