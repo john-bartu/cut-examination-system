@@ -6,6 +6,7 @@ import { Student } from '../../app/student.schema';
 import { Thesis } from '../../app/thesis.schema';
 import { GradesService } from '../grades.service';
 import { IProgressRecord, ISemester, ISubject } from '../parser/models';
+import { AuxiliaryFunctions } from '../parser/parser';
 import { UserListService } from '../user-list/user-list.service';
 
 @Component({
@@ -119,8 +120,8 @@ export class UserSummaryComponent implements OnInit {
   }
 
   calculateFinalGrade() {
-    const tempFinalGrade = this.avgGrade * 0.6 + this.thesisGrade * 0.2 + this.diplomaGrade * 0.2;
-
+    const tempFinalGrade = AuxiliaryFunctions.formatGradeToCorrectFormat(this.avgGrade * 0.6 + this.thesisGrade * 0.2 + this.diplomaGrade * 0.2);
+    
     if (tempFinalGrade >= 4.6) {
       this.finalGrade = 5
     } else if(tempFinalGrade >= 4.26) {

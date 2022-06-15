@@ -1,6 +1,6 @@
 <p>nr albumu: {{ progressRecord.student.albumNum }}</p>
 <p>imie: {{ progressRecord.student.name }}</p>
-<p>data uro: {{ progressRecord.student.birthDate }}</p>
+<p>data uro: {{ progressRecord.student.birthDate | date: "d.MM.y" }}</p>
 <p>specjalność: {{ progressRecord.student.specialty }}</p>
 <p>Temat pracy: {{ progressRecord.thesis.subject }}</p>
 <p>rok: {{ progressRecord.academicYear }}</p>
