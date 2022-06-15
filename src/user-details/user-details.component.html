@@ -1,0 +1,19 @@
+<nav>
+  <a routerLink="/userList">cancel</a>
+</nav>
+<p>nr albumu: {{ progressRecord.student.albumNum }}</p>
+<p>imie: {{ progressRecord.student.name }}</p>
+<p>data uro: {{ progressRecord.student.birthDate | date: "d.MM.y" }}</p>
+<p>kierunek: {{ progressRecord.student.course }}</p>
+<p>specjalność: {{ progressRecord.student.specialty }}</p>
+<p>Temat pracy: {{ progressRecord.thesis.subject }}</p>
+<p>rok: {{ progressRecord.academicYear }}</p>
+<p>srednia ocena ze studiow: {{ avgGrade | number: "1.2-2" }}</p>
+<button
+  mat-button
+  [disabled]="!areQuestionsExist()"
+  routerLink="/userExamination/{{ progressRecord.student.albumNum }}"
+>
+  Proces dyplomowy
+</button>
+<div *ngIf="!areQuestionsExist()">Najpierw zaimportuj pytania!</div>
