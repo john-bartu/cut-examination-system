@@ -1,61 +1,52 @@
-<div class="body">
-  <div class="top-menu">
-    <div class="logo">
-      <img src="./assets/img/logo2.png" alt="error">
-    </div>
-    <nav class="top-menu-button">
-      <a routerLink="/menu">przerwij egzamin</a>
+<div class="page">
+  <header>
+    <img class="logo" src="./assets/img/logo2.png" alt="error">
+    <nav>
+      <a class="mat-flat-button mat-warn" routerLink="/menu">przerwij egzamin<</a>
     </nav>
-  </div>
+  </header>
 
-  <div class="examination-panel">
-    <div class="left_menu">
+  <main>
+    <div class="full_panel">
+
+      <div class="row">
+        <div *ngFor="let question of dataSource.data" class="row">
+          <a (click)="displayAnswer(question.id)">{{ question.question }}</a>
+        </div>
+
+      </div>
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource">
-          <!-- Name Column -->
-          <ng-container matColumnDef="question">
-            <th mat-header-cell *matHeaderCellDef>question</th>
-            <td mat-cell *matCellDef="let row">{{ row.question }}</td>
-          </ng-container>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="answer">
-            <th mat-header-cell *matHeaderCellDef>answer</th>
-            <td mat-cell *matCellDef="let row">{{ row.answer }}</td>
-          </ng-container>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="displayAnswer">
-            <th mat-header-cell *matHeaderCellDef>displayAnswer</th>
-            <td mat-cell *matCellDef="let row">
-              <button mat-button (click)="displayAnswer(row.id)">
-                <mat-icon>remove_red_eye</mat-icon>
-              </button>
-            </td>
-          </ng-container>
+        <label>
+          Ocena prezentacji
+          <input
+            required
+            [min]="2"
+            [max]="5"
+            [step]="0.05"
+            type="number"
+            [(ngModel)]="diplomaGrade"
+            (input)="updateDiplomaGrade($event)"
+          />
+        </label>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
 
-        <input
-          required
-          [min]="2"
-          [max]="5"
-          type="number"
-          [(ngModel)]="diplomaGrade"
-          class="form-control"
-          (input)="updateDiplomaGrade($event)"
-        />DiplomaGrade
-        <input
-          required
-          [min]="2"
-          [max]="5"
-          type="number"
-          [(ngModel)]="thesisGrade"
-          class="form-control"
-          (input)="updateThesisGrade($event)"
-        />ThesisGrade
+        <label>
+          Ocena pracy
+          <input
+            required
+            [min]="2"
+            [max]="5"
+            [step]="0.05"
+            type="number"
+            [(ngModel)]="thesisGrade"
+            class="form-control"
+            (input)="updateThesisGrade($event)"
+          />
+        </label>
+
+
         <button
           mat-button
           [disabled]="
@@ -72,12 +63,5 @@
         </button>
       </div>
     </div>
-    <div class="right_menu">
-      <p>answer: {{ answer }}</p>
-    </div>
-  </div>
+  </main>
 </div>
-
-
-
-
