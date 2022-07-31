@@ -2,66 +2,73 @@
   <header>
     <img class="logo" src="./assets/img/logo2.png" alt="error">
     <nav>
-      <a class="mat-flat-button mat-warn" routerLink="/menu">przerwij egzamin<</a>
+      <a class="mat-flat-button warning" routerLink="/menu">Przerwanie Dyplomowania</a>
     </nav>
   </header>
 
   <main>
-    <div class="full_panel">
+    <div class="full_panel diploma">
 
-      <div class="row">
-        <div *ngFor="let question of dataSource.data" class="row">
-          <a (click)="displayAnswer(question.id)">{{ question.question }}</a>
+      <div class="diploma-box">
+        <div class="questions">
+          <div *ngFor="let question of dataSource.data" class="question">
+            <div (click)="displayAnswer(question.id)">{{ question.question }}</div>
+          </div>
         </div>
 
-      </div>
-      <div class="mat-elevation-z8">
+        <div class="row row-center grade">
+          <div class="column">
+            <label>
+              Ocena prezentacji
+            </label>
 
+            <input
+              required
+              [min]="2"
+              [max]="5"
+              [step]="0.25"
+              type="number"
+              [(ngModel)]="diplomaGrade"
+              (input)="updateDiplomaGrade($event)"
+            />
 
-        <label>
-          Ocena prezentacji
-          <input
-            required
-            [min]="2"
-            [max]="5"
-            [step]="0.05"
-            type="number"
-            [(ngModel)]="diplomaGrade"
-            (input)="updateDiplomaGrade($event)"
-          />
-        </label>
+          </div>
 
+          <div class="column">
+            <label>
+              Ocena pracy
+            </label>
+            <input
+              required
+              [min]="2"
+              [max]="5"
+              [step]="0.25"
+              type="number"
+              [(ngModel)]="thesisGrade"
+              class="form-control"
+              (input)="updateThesisGrade($event)"
+            />
+          </div>
+        </div>
 
-        <label>
-          Ocena pracy
-          <input
-            required
-            [min]="2"
-            [max]="5"
-            [step]="0.05"
-            type="number"
-            [(ngModel)]="thesisGrade"
-            class="form-control"
-            (input)="updateThesisGrade($event)"
-          />
-        </label>
-
-
-        <button
-          mat-button
-          [disabled]="
+        <button class="diploma-accept-button" [disabled]="
       !diplomaGrade ||
       diplomaGrade < 2 ||
       diplomaGrade > 5 ||
       !thesisGrade ||
       thesisGrade < 2 ||
       thesisGrade > 5
-    "
-          routerLink="/userSummary/{{ student.albumNum }}"
-        >
+    " routerLink="/userSummary/{{ student.albumNum }}">
           Akceptuj
         </button>
       </div>
     </div>
   </main>
+</div>
+
+
+<div class="question-answer-box" [ngClass]="{'hidden': isAnswerShowed === false}" (click)="hideAnswer()">
+  <div class="answer" (click)="hideAnswer()">
+    <p>{{answer ?? "To pytanie nie ma odpowiedzi"}}</p>
+  </div>
 </div>

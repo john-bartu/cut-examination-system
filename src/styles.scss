@@ -147,10 +147,10 @@ body {
 }
 
 
-.right_menu_button, button {
+.right_menu_button {
   background: #F0F0F0;
   border: 1px solid #C0C0C0;
-  box-shadow: 0px 3px 6px rgb(0 0 0 / 25%);
+  box-shadow: 0 3px 6px rgb(0 0 0 / 25%);
   border-radius: 3px;
   margin: 0.5em 0;
   height: 10%;
@@ -161,6 +161,7 @@ body {
   font-size: 2em;
   color: #2A2F33;
   cursor: pointer;
+  text-align: center;
 }
 
 .left_menu {
@@ -269,14 +270,7 @@ button {
     }
   }
 
-  .row {
-    display: flex;
-    flex-direction: row;
-  }
-
   .column {
-    display: flex;
-    flex-direction: column;
     padding: 1em;
   }
 
@@ -294,9 +288,20 @@ button {
 
 }
 
-.row.diploma {
 
+.row {
   display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
+
+
+.row.diploma {
   align-items: center;
 
 
@@ -311,3 +316,106 @@ button {
 }
 
 
+.diploma-accept-button {
+  margin: auto;
+  border: 1px solid #1E2C33;
+  font-size: 1.2em;
+  padding: 0.25em 1em;
+  display: block;
+}
+
+.full_panel.diploma {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.diploma-box {
+  width: 900px;
+
+  .questions {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .question {
+      box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.25);
+      background-color: white;
+      padding: 2em;
+      font-size: 1.2em;
+    }
+  }
+
+  label {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  input {
+    margin: 0.5em auto auto;
+    padding: 0.5em 0.1em;
+    font-size: 1.5em;
+    border-radius: 0.25em;
+    width: 96px;
+
+    text-align: center;
+  }
+
+  .grade {
+    margin-top: 2em;
+  }
+}
+
+.row-center {
+  justify-content: center;
+}
+
+.diploma-accept-button{
+  background: #F0F0F0;
+  border: 1px solid #C0C0C0;
+  box-shadow: 0 3px 6px rgb(0 0 0 / 25%);
+  border-radius: 3px;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: #2A2F33;
+  text-align: center;
+  margin: auto;
+}
+
+.diploma-accept-button:disabled{
+  opacity: 0.5;
+}
+
+
+.question-answer-box{
+  top:0;
+  left: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.79);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  .answer{
+    width: 840px;
+    min-height: 256px;
+    background-color: white;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 50%);
+    padding: 1em;
+  }
+}
+
+.hidden{
+  display: none;
+}
+
+.warning{
+  background-color: #f44336;
+  color:white;
+}

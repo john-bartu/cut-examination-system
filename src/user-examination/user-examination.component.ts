@@ -21,6 +21,8 @@ export class UserExaminationComponent implements OnInit {
   diplomaGrade;
   thesisGrade;
 
+  isAnswerShowed: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private questionManagerService: QuestionManagerService,
@@ -34,9 +36,21 @@ export class UserExaminationComponent implements OnInit {
   }
 
   displayAnswer(id: number) {
+    console.log("SHOW")
     this.questionManagerService.getQuestion(id).subscribe((result) => {
-      this.answer = result.answer;
+
+      if (result.answer == null || result.answer == "")
+        this.answer = null;
+      else
+        this.answer = result.answer;
+
+
     });
+    this.isAnswerShowed = true;
+  }
+
+  hideAnswer() {
+    this.isAnswerShowed = false;
   }
 
   drawQuestions(): IQuestion[] {

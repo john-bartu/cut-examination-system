@@ -3,7 +3,7 @@
     <img class="logo" src="./assets/img/logo2.png" alt="error">
     <nav>
       <a class="mat-flat-button" routerLink="/menu">Menu</a>
-      <a class="mat-flat-button mat-warn" (click)="deleteAllItems()">ClearDB</a>
+      <a class="mat-flat-button mat-warn" (click)="deleteAllItems()">Wyczyść</a>
 
       <label class="mat-flat-button">
         Wgraj z pliku
@@ -26,7 +26,7 @@
     <div class="full_panel">
       <mat-form-field appearance="standard">
         <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input/>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Np.: Podstawy sieci komputerowych" #input/>
       </mat-form-field>
 
       <div class="mat-elevation-z8">
@@ -47,12 +47,6 @@
           <ng-container matColumnDef="question">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Pytanie</th>
             <td mat-cell *matCellDef="let row">{{ row.question }}</td>
-          </ng-container>
-
-          <!-- Name Column -->
-          <ng-container matColumnDef="answer">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Odpowiedź</th>
-            <td mat-cell *matCellDef="let row">{{ row.answer }}</td>
           </ng-container>
 
           <!-- Name Column -->

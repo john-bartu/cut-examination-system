@@ -16,7 +16,6 @@ export class QuestionManagerComponent implements AfterViewInit {
     'id',
     'subject',
     'question',
-    'answer',
     'deleteQuestion',
   ];
   dataSource: MatTableDataSource<IQuestion>;
