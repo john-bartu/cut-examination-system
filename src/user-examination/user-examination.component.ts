@@ -22,6 +22,7 @@ export class UserExaminationComponent implements OnInit {
   thesisGrade;
 
   isAnswerShowed: boolean = false;
+  answerGrade: number[] = [null, null, null];
 
   constructor(
     private route: ActivatedRoute,
@@ -120,9 +121,10 @@ export class UserExaminationComponent implements OnInit {
     return selectedQuestions;
   }
 
-  updateDiplomaGrade(grade: Event): void {
-    const xd = grade.target as HTMLTextAreaElement;
-    this.gradesService.setDiplomaGrade(AuxiliaryFunctions.formatGradeToCorrectFormat(parseFloat(xd.value)));
+  updateDiplomaGrade(): void {
+    const xd = ((this.answerGrade[0] + this.answerGrade[1] + this.answerGrade[2]) / 3 + this.diplomaGrade) / 2
+    console.log("ocena diploma:", xd)
+    this.gradesService.setDiplomaGrade(AuxiliaryFunctions.formatGradeToCorrectFormat(xd));
   }
 
   updateThesisGrade(grade: Event): void {
