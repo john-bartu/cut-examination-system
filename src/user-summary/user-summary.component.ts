@@ -121,7 +121,7 @@ export class UserSummaryComponent implements OnInit {
 
   calculateFinalGrade() {
     const tempFinalGrade = AuxiliaryFunctions.formatGradeToCorrectFormat(this.avgGrade * 0.6 + this.thesisGrade * 0.2 + this.diplomaGrade * 0.2);
-    
+
     if (tempFinalGrade >= 4.6) {
       this.finalGrade = 5
     } else if(tempFinalGrade >= 4.26) {
@@ -134,7 +134,7 @@ export class UserSummaryComponent implements OnInit {
       this.finalGrade = 3
     } else {
       this.finalGrade = 2
-    } 
+    }
   }
 
   addStudentToExaminated(albumNum: number) {

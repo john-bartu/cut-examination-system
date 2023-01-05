@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
-import { Student } from '../../app/student.schema';
-import { GradesService } from '../grades.service';
-import { IQuestion } from '../parser/models';
-import { AuxiliaryFunctions } from '../parser/parser';
-import { QuestionManagerService } from '../question-manager/question-manager.service';
-import { UserListService } from '../user-list/user-list.service';
+import {Component, OnInit} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {ActivatedRoute} from '@angular/router';
+import {Student} from '../../app/student.schema';
+import {GradesService} from '../grades.service';
+import {IQuestion} from '../parser/models';
+import {AuxiliaryFunctions} from '../parser/parser';
+import {QuestionManagerService} from '../question-manager/question-manager.service';
+import {UserListService} from '../user-list/user-list.service';
 
 @Component({
   selector: 'app-user-examination',
@@ -21,6 +21,8 @@ export class UserExaminationComponent implements OnInit {
   diplomaGrade;
   thesisGrade;
 
+  isAnswerShowed: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private questionManagerService: QuestionManagerService,
@@ -30,12 +32,25 @@ export class UserExaminationComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.drawQuestions());
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   displayAnswer(id: number) {
+    console.log("SHOW")
     this.questionManagerService.getQuestion(id).subscribe((result) => {
-      this.answer = result.answer;
+
+      if (result.answer == null || result.answer == "")
+        this.answer = null;
+      else
+        this.answer = result.answer;
+
+
     });
+    this.isAnswerShowed = true;
+  }
+
+  hideAnswer() {
+    this.isAnswerShowed = false;
   }
 
   drawQuestions(): IQuestion[] {
@@ -75,7 +90,21 @@ export class UserExaminationComponent implements OnInit {
         return element.specialization == this.student.specialty;
       });
 
-      for (let i = 0; i < 2; i++) {
+
+      let global_question_number = 2;
+
+      randomNumber = Math.floor(Math.random() * specQuestions.length);
+      let specQuestion = specQuestions[randomNumber];
+
+      if (specQuestion != null)
+        selectedQuestions.push(specQuestion);
+      else {
+        global_question_number += 1;
+        console.log("Nie znaleziono pytania ze specjalizacji: ", this.student.specialty)
+      }
+
+
+      for (let i = 0; i < global_question_number; i++) {
         randomNumber = Math.floor(Math.random() * generalQuestions.length);
         tempQuestion = generalQuestions[randomNumber];
 
@@ -86,8 +115,7 @@ export class UserExaminationComponent implements OnInit {
         }
       }
 
-      randomNumber = Math.floor(Math.random() * specQuestions.length);
-      selectedQuestions.push(specQuestions[randomNumber]);
+
     }
     return selectedQuestions;
   }
