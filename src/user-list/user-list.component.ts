@@ -102,11 +102,11 @@ export class UserListComponent implements AfterViewInit {
       this.userListService.addStudent(progressRecord.student).subscribe((id) => {
         studentId = id;
       });
-  
+
       this.userListService.addThesis(progressRecord.thesis).subscribe((id) => {
         thesisId = id;
       });
-  
+
       for (let semester of progressRecord.semesters) {
         for (let subject of semester.subjects) {
           this.userListService

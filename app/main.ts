@@ -47,7 +47,7 @@ async function createWindow(): Promise<BrowserWindow> {
       contextIsolation: false,  // false if you want to run e2e test with Spectron
     },
   });
-
+  win.maximize();
   if (serve) {
     const debug = require('electron-debug');
     debug();
